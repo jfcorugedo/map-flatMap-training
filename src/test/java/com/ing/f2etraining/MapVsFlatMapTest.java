@@ -35,7 +35,8 @@ public class MapVsFlatMapTest {
         );
 
         //when
-        List<String> names = people.stream().map( person -> person.getName() ).collect(Collectors.toList());
+        /* TODO */
+        List<String> names = null;
 
         //then
         assertThat(names).containsOnly("Juan", "David", "Miguel");
@@ -47,7 +48,8 @@ public class MapVsFlatMapTest {
         Optional<Person> personOptional = Optional.of(new Person().setName("Juan").setAge(35));
 
         //when
-        Optional<String> nameOptional = personOptional.map( person -> person.getName() );
+        /* TODO */
+        Optional<String> nameOptional = null;
 
         //then
         assertThat(nameOptional).contains("Juan");
@@ -63,7 +65,8 @@ public class MapVsFlatMapTest {
         );
 
         //when
-        List<String> names = people.stream().flatMap( person -> Stream.of(person.getName()) ).collect(Collectors.toList());
+        /* TODO */
+        List<String> names = null;
 
         //then
         assertThat(names).containsOnly("Juan", "David", "Miguel");
@@ -75,7 +78,8 @@ public class MapVsFlatMapTest {
         Optional<Person> personOptional = Optional.of(new Person().setName("Juan").setAge(35));
 
         //when
-        Optional<String> nameOptional = personOptional.flatMap( person -> Optional.ofNullable(person.getName()) );
+        /* TODO */
+        Optional<String> nameOptional = null;
 
         //then
         assertThat(nameOptional).contains("Juan");
@@ -87,7 +91,8 @@ public class MapVsFlatMapTest {
         Future<Person> personFuture = Futures.successful(new Person().setName("Juan").setAge(35));
 
         //when
-        Future<String> nameF = personFuture.map(person -> person.getName(), EXECUTOR);
+        /* TODO */
+        Future<String> nameF = null;
 
         //then
         String name = (String) Await.result(nameF, TIMEOUT.duration());
@@ -100,7 +105,8 @@ public class MapVsFlatMapTest {
         Future<Person> personFuture = Futures.successful(new Person().setName("Juan").setAge(35));
 
         //when
-        Future<String> nameF = personFuture.flatMap(person -> Futures.successful(person.getName()), EXECUTOR);
+        /* TODO */
+        Future<String> nameF = null;
 
         //then
         String name = (String) Await.result(nameF, TIMEOUT.duration());
@@ -114,11 +120,8 @@ public class MapVsFlatMapTest {
         Future<Person> friendFuture = Futures.successful(new Person().setName("Miguel").setAge(28));
 
         //when
-        Future<Integer> sumAgeF = meFuture.flatMap(
-                me -> friendFuture.flatMap(
-                            friend -> Futures.successful(me.getAge() + friend.getAge())
-                , EXECUTOR)
-        , EXECUTOR);
+        /* TODO */
+        Future<Integer> sumAgeF = null;
 
         //then
         Integer sumAge = (Integer) Await.result(sumAgeF, TIMEOUT.duration());
@@ -132,11 +135,8 @@ public class MapVsFlatMapTest {
         Future<Person> friendFuture = Futures.successful(new Person().setName("Miguel").setAge(28));
 
         //when
-        Future<Future<Integer>> sumAgeFF = meFuture.map(
-                me -> friendFuture.map(
-                        friend -> friend.getAge() + me.getAge()
-                , EXECUTOR)
-        , EXECUTOR);
+        /* TODO */
+        Future<Future<Integer>> sumAgeFF = null;
 
         //then
         Future<Integer> sumAgeF = Await.result(sumAgeFF, TIMEOUT.duration());
@@ -151,11 +151,8 @@ public class MapVsFlatMapTest {
         Future<Person> friendFuture = Futures.successful(new Person().setName("Miguel").setAge(28));
 
         //when
-        Future<Integer> sumAgeF = meFuture.flatMap(
-                me ->friendFuture.map(
-                        friend -> friend.getAge() + me.getAge()
-                , EXECUTOR)
-        , EXECUTOR);
+        /* TODO */
+        Future<Integer> sumAgeF = null;
 
         //then
         Integer sumAge = (Integer) Await.result(sumAgeF, TIMEOUT.duration());
@@ -169,11 +166,8 @@ public class MapVsFlatMapTest {
         //Use service Future<Person> getFriend(String name)
 
         //when
-        Future<Integer> sumAgeF = meFuture.flatMap(
-                person -> getFriend(person.getName()).map(
-                        friend -> person.getAge() + friend.getAge()
-                , EXECUTOR)
-            , EXECUTOR);
+        /* TODO */
+        Future<Integer> sumAgeF = null;
 
         //then
         Integer sumAge = (Integer) Await.result(sumAgeF, TIMEOUT.duration());
