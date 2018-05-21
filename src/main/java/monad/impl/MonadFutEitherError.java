@@ -13,7 +13,7 @@ import scala.util.Either;
 import scala.util.Left;
 import scala.util.Right;
 import util.Java8;
-import com.logicaalternativa.monadtransformerandmore.errors.GenericError;
+import errors.GenericError;
 
 public class MonadFutEitherError implements MonadFutEither<GenericError> {
 	

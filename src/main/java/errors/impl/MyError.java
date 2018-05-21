@@ -1,6 +1,6 @@
 package errors.impl;
 
-public class MyError implements com.logicaalternativa.monadtransformerandmore.errors.GenericError {
+public class MyError implements errors.GenericError {
 	
 	private final String description;
 

@@ -1,4 +1,4 @@
-package com.logicaalternativa.monadtransformerandmore.errors;
+package errors;
 
 public interface GenericError {
 	
