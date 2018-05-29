@@ -128,13 +128,7 @@ public class MapVsFlatMapTest {
 
         //when
         /* TODO */
-        Future<Integer> sumAgeF = meFuture.flatMap(
-
-                me -> friendFuture.flatMap(
-                        friend -> Futures.successful(me.getAge() + friend.getAge())
-                        ,EXECUTOR)
-
-        , EXECUTOR);
+        Future<Integer> sumAgeF = null;
 
         //then
         Integer sumAge = (Integer) Await.result(sumAgeF, TIMEOUT.duration());
@@ -149,10 +143,7 @@ public class MapVsFlatMapTest {
 
         //when
         /* TODO */
-        Future<Future<Integer>> sumAgeFF = meFuture.map(
-                                        me -> friendFuture.map(
-                                            friend -> friend.getAge() + me.getAge()
-                ,EXECUTOR),EXECUTOR);
+        Future<Future<Integer>> sumAgeFF = null;
 
         //then
         Future<Integer> sumAgeF = Await.result(sumAgeFF, TIMEOUT.duration());
@@ -168,10 +159,7 @@ public class MapVsFlatMapTest {
 
         //when
         /* TODO */
-        Future<Integer> sumAgeF = meFuture.flatMap(
-                me -> friendFuture.map(
-                        friend -> friend.getAge() + me.getAge(),EXECUTOR
-                ),EXECUTOR);
+        Future<Integer> sumAgeF = null;
 
         //then
         Integer sumAge = (Integer) Await.result(sumAgeF, TIMEOUT.duration());
@@ -188,10 +176,7 @@ public class MapVsFlatMapTest {
 
         //when
         /* TODO */
-        Future<Integer> sumAgeF = meFuture.flatMap(
-                me -> friendFuture.map(
-                        friend -> friend.getAge() + me.getAge(),EXECUTOR
-                ),EXECUTOR);
+        Future<Integer> sumAgeF = null;
 
         //then
         Integer sumAge = (Integer) Await.result(sumAgeF, TIMEOUT.duration());
@@ -206,10 +191,7 @@ public class MapVsFlatMapTest {
 
         //when
         /* TODO */
-        Future<Integer> sumAgeF = meFuture.flatMap(
-                me -> friendFuture.map(
-                        friend -> friend.getAge() + me.getAge(),EXECUTOR
-                ),EXECUTOR).recover(Java8.recoverF(error -> -1), EXECUTOR);
+        Future<Integer> sumAgeF = null;
 
         //then
         Integer sumAge = (Integer) Await.result(sumAgeF, TIMEOUT.duration());
@@ -224,10 +206,7 @@ public class MapVsFlatMapTest {
 
         //when
         /* TODO */
-        Future<Integer> sumAgeF = meFuture.flatMap(
-                me -> friendFuture.map(
-                        friend -> friend.getAge() + me.getAge(),EXECUTOR
-                ),EXECUTOR).recover(Java8.recoverF(error -> -1), EXECUTOR);
+        Future<Integer> sumAgeF = null;
 
         //then
         Integer sumAge = (Integer) Await.result(sumAgeF, TIMEOUT.duration());
@@ -242,13 +221,7 @@ public class MapVsFlatMapTest {
 
         //when
         /* TODO */
-        Future<Integer> sumAgeF = meFuture.flatMap(
-                me -> friendFuture.map(
-                        friend -> {
-                            if(me.isLeft() || friend.isLeft()) return -2;
-                            return friend.right().get().getAge() + me.right().get().getAge();
-                        },EXECUTOR
-                ),EXECUTOR).recover(Java8.recoverF(error -> -1), EXECUTOR);
+        Future<Integer> sumAgeF = null;
 
         //then
         Integer sumAge = (Integer) Await.result(sumAgeF, TIMEOUT.duration());
