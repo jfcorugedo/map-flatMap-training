@@ -170,7 +170,6 @@ public class MapVsFlatMapTest {
     public void combineSeveralDependentFuturesWithFlatMapAndMap() throws Exception {
         //given
         Future<Person> meFuture = Futures.successful(new Person().setName("Juan").setAge(35));
-        Future<Person> friendFuture = meFuture.flatMap( me -> getFriend(me.getName()), EXECUTOR);
 
         //Use service Future<Person> getFriend(String name)
 
