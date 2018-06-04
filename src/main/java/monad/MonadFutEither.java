@@ -8,10 +8,11 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 import akka.dispatch.Futures;
+import function.Function3;
+import function.Function4;
 import scala.concurrent.Future;
 import scala.util.Either;
 
-import com.logicaalternativa.monadtransformerandmore.function.Function3;
 
 public interface MonadFutEither<E> {
 
@@ -78,7 +79,7 @@ public interface MonadFutEither<E> {
 
 	}
 
-	default <A,B,C,T> scala.concurrent.Future<Either<E,T>> map3( Future<Either<E, A>> fromA,
+	default <A,B,C,T> Future<Either<E,T>> map3( Future<Either<E, A>> fromA,
 																 Future<Either<E, B>> fromB,
 																 Future<Either<E, C>> fromC,
 																 Function3<A,B,C,T> f  ) {
@@ -86,6 +87,16 @@ public interface MonadFutEither<E> {
 		// tambien: flatMap(fromA, a -> flatMap(fromB, b -> map(fromC, c-> f.apply(a, b, c))));
 		// tambien flatMap2(fromA, fromB, (a, b) -> map(fromC, c -> f.apply(a, b, c)));
 		return flatMap(fromA, a -> map2(fromB, fromC, (b, c)-> f.apply(a, b, c)));
+
+	}
+
+	default <A,B,C,D,T> scala.concurrent.Future<Either<E,T>> map4( Future<Either<E, A>> fromA,
+																 Future<Either<E, B>> fromB,
+																 Future<Either<E, C>> fromC,
+																 Future<Either<E, D>> fromD,
+																 Function4<A,B,C,D,T> f  ) {
+
+		return flatMap(fromA, a -> map3(fromB, fromC, fromD, (b, c, d)-> f.apply(a, b, c, d)));
 
 	}
 

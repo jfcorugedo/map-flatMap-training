@@ -1,4 +1,4 @@
-package com.logicaalternativa.monadtransformerandmore.function;
+package function;
 
 @FunctionalInterface
 public interface Function3 <A,B,C,T> {	

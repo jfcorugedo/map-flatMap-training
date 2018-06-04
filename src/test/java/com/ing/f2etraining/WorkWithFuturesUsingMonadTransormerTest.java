@@ -167,6 +167,23 @@ public class WorkWithFuturesUsingMonadTransormerTest {
         assertThat(sumAge.right().get()).isEqualTo(112);
     }
 
+    @Test
+    public void combineFourFutureWithMonadTransformer() throws Exception {
+        //given
+        Future<Either<GenericError,Person>> meFutureFuture = Futures.successful(new Right<>(new Person().setName("Juan").setAge(35)));
+        Future<Either<GenericError,Person>> myBestFriendFuture = Futures.successful(new Right<>(new Person().setName("Miguel").setAge(28)));
+        Future<Either<GenericError,Person>> anotherFriendFuture = Futures.successful(new Right<>(new Person().setName("Eva").setAge(49)));
+        Future<Either<GenericError,Person>> friendFuture = Futures.successful(new Right<>(new Person().setName("Ivan").setAge(20)));
+
+        //when
+        Future<Either<GenericError, Integer>> sumAgeF = null;
+
+
+        //then
+        Either<GenericError, Integer> sumAge = (Either<GenericError, Integer>) Await.result(sumAgeF, TIMEOUT.duration());
+        assertThat(sumAge.right().get()).isEqualTo(132);
+    }
+
 
     private Future<Either<GenericError,Person>> getFriend(String name) {
 

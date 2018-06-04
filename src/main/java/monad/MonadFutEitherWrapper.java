@@ -1,6 +1,7 @@
 package monad;
 
-import com.logicaalternativa.monadtransformerandmore.function.Function3;
+import function.Function3;
+import function.Function4;
 import scala.concurrent.Future;
 import scala.util.Either;
 
@@ -57,5 +58,12 @@ public class MonadFutEitherWrapper<E, T> {
                                                          Function3<T,B,C,S> f  ) {
 
         return wrap( m.map3(fut, fromB, fromC, f), m );
+    }
+
+    public <A, B, C, S> MonadFutEitherWrapper<E,S> map4(Future<Either<E, A>> fromA,
+                                                        Future<Either<E, B>> fromB,
+                                                        Future<Either<E, C>> fromC,
+                                                        Function4<T, A, B, C, S> f) {
+        return wrap( m.map4(fut, fromA, fromB, fromC, f), m );
     }
 }
