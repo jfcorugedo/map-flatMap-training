@@ -92,11 +92,6 @@ public class WorkWithFuturesUsingMonadTransormerTest {
                         ,EXECUTOR)
                 ,EXECUTOR);
          */
-
-        /*Future<Either<GenericError, Integer>> sumAgeF = wrap(meFuture,monadTransformer)
-                .map2(friendFuture,(me,friend)->me.getAge()+friend.getAge())
-                .recover(genericError -> -1)
-                .value();;*/
         Future<Either<GenericError, Integer>> sumAgeF = null;
 
 
