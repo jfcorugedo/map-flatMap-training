@@ -6,6 +6,8 @@ This project contains a test class (`MapVsFlatMapTest`) that contains a set of t
 
 It uses several types to work on: Optional, List and Futures, just to show that no matter the type your working on, map and flatMap operations do the same thing: a transformation.
 
+In addition it contains another test class (`WorkWithFuturesUsingMonadTransormerTest`) to get used to the same operations but instead of using raw Scala futures, using the MonadTransformer object.
+
 # How to start
 To start solving the tests, just download master branch and execute tests (using your IDE or mvn test).
 
