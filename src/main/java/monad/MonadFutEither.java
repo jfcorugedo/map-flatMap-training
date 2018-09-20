@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
-import akka.dispatch.Futures;
 import function.Function3;
 import function.Function4;
 import scala.concurrent.Future;
@@ -84,8 +83,6 @@ public interface MonadFutEither<E> {
 																 Future<Either<E, C>> fromC,
 																 Function3<A,B,C,T> f  ) {
 
-		// tambien: flatMap(fromA, a -> flatMap(fromB, b -> map(fromC, c-> f.apply(a, b, c))));
-		// tambien flatMap2(fromA, fromB, (a, b) -> map(fromC, c -> f.apply(a, b, c)));
 		return flatMap(fromA, a -> map2(fromB, fromC, (b, c)-> f.apply(a, b, c)));
 
 	}
