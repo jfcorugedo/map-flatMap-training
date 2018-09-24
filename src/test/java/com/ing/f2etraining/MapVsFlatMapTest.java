@@ -125,4 +125,42 @@ public class MapVsFlatMapTest {
         String name = (String) Await.result(nameF, TIMEOUT.duration());
         assertThat(name).isEqualTo("Juan");
     }
+
+    @Test
+    public void workWithListsInsideList() {
+        //given
+        List<Person> people = Arrays.asList(
+            new Person().setName("Juan").setAge(35).addSkill("Java").addSkill("Go"),
+            new Person().setName("Miguel").setAge(34).addSkill("C++").addSkill("Python"),
+            new Person().setName("David").setAge(28).addSkill("Scala")
+        );
+
+        //when
+        //Hint: Try to use map first
+        /* TODO */
+        List<String> skills = null;
+
+        //then
+        assertThat(skills).containsOnly("Java", "Go", "C++", "Python", "Scala");
+    }
+
+    @Test
+    public void workWithFutureInsideAotherFuture() throws Exception{
+        //given
+        Future<Person> personFuture = Futures.successful(new Person().setName("Juan").setAge(35));
+
+        //when
+        //Hint: you need to use getSalary method to get the salary of this person. First try with map
+        /* TODO */
+        Future<Double> salaryF = null;
+
+        //then
+        Double salary = Await.result(salaryF, TIMEOUT.duration());
+        assertThat(salary).isEqualTo(100000d);
+    }
+
+    private Future<Double> getSalary(String name) {
+
+        return Futures.successful(100000d);
+    }
 }
