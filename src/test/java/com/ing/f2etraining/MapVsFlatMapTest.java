@@ -65,7 +65,7 @@ public class MapVsFlatMapTest {
     }
 
     @Test
-    public void useMaoOnFutures() throws Exception {
+    public void useMapOnFutures() throws Exception {
         //given
         Future<Person> personFuture = Futures.successful(new Person().setName("Juan").setAge(35));
 
