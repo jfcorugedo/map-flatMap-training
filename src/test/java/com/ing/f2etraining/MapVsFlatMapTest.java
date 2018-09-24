@@ -33,7 +33,7 @@ public class MapVsFlatMapTest {
     private static final Timeout TIMEOUT = new Timeout(Duration.create(5, "seconds"));
 
     @Test
-    public void whatIsAMapOnLists() {
+    public void useMapOnList() {
         //given
         List<Person> people = Arrays.asList(
                 new Person().setName("Juan").setAge(35),
@@ -42,6 +42,7 @@ public class MapVsFlatMapTest {
         );
 
         //when
+        //Hint: You have to use map
         /* TODO */
         List<String> names = null;
 
@@ -50,11 +51,12 @@ public class MapVsFlatMapTest {
     }
 
     @Test
-    public void whatIsAMapOnOptionals() {
+    public void useMapOnOptional() {
         //given
         Optional<Person> personOptional = Optional.of(new Person().setName("Juan").setAge(35));
 
         //when
+        //Hint: You have to use map
         /* TODO */
         Optional<String> nameOptional = null;
 
@@ -63,41 +65,12 @@ public class MapVsFlatMapTest {
     }
 
     @Test
-    public void whatIsAFlatMapOnLists() {
-        //given
-        List<Person> people = Arrays.asList(
-                new Person().setName("Juan").setAge(35),
-                new Person().setName("Miguel").setAge(34),
-                new Person().setName("David").setAge(28)
-        );
-
-        //when
-        /* TODO */
-        List<String> names = null;
-
-        //then
-        assertThat(names).containsOnly("Juan", "David", "Miguel");
-    }
-
-    @Test
-    public void whatIsAFlatMapOnOptionals() {
-        //given
-        Optional<Person> personOptional = Optional.of(new Person().setName("Juan").setAge(35));
-
-        //when
-        /* TODO */
-        Optional<String> nameOptional = null;
-
-        //then
-        assertThat(nameOptional).contains("Juan");
-    }
-
-    @Test
-    public void whatIsAMapOnFutures() throws Exception {
+    public void useMaoOnFutures() throws Exception {
         //given
         Future<Person> personFuture = Futures.successful(new Person().setName("Juan").setAge(35));
 
         //when
+        //Hint: You have to use map
         /* TODO */
         Future<String> nameF = null;
 
@@ -107,129 +80,49 @@ public class MapVsFlatMapTest {
     }
 
     @Test
-    public void whatIsAFlatMapOnFutures() throws Exception {
+    public void useFlatMapOnList() {
+        //given
+        List<Person> people = Arrays.asList(
+                new Person().setName("Juan").setAge(35),
+                new Person().setName("Miguel").setAge(34),
+                new Person().setName("David").setAge(28)
+        );
+
+        //when
+        //Hint: You have to use flatMap
+        /* TODO */
+        List<String> names = null;
+
+        //then
+        assertThat(names).containsOnly("Juan", "David", "Miguel");
+    }
+
+    @Test
+    public void useFlatMapOnOptional() {
+        //given
+        Optional<Person> personOptional = Optional.of(new Person().setName("Juan").setAge(35));
+
+        //when
+        //Hint: You have to use flatMap
+        /* TODO */
+        Optional<String> nameOptional = null;
+
+        //then
+        assertThat(nameOptional).contains("Juan");
+    }
+
+    @Test
+    public void useFlatMapOnFuture() throws Exception {
         //given
         Future<Person> personFuture = Futures.successful(new Person().setName("Juan").setAge(35));
 
         //when
+        //Hint: You have to use flatMap
         /* TODO */
         Future<String> nameF = null;
 
         //then
         String name = (String) Await.result(nameF, TIMEOUT.duration());
         assertThat(name).isEqualTo("Juan");
-    }
-
-    @Test
-    public void combineSeveralFuturesWithFlatMap() throws Exception {
-        //given
-        Future<Person> meFuture = Futures.successful(new Person().setName("Juan").setAge(35));
-        Future<Person> friendFuture = Futures.successful(new Person().setName("Miguel").setAge(28));
-
-        //when
-        /* TODO */
-        Future<Integer> sumAgeF = null;
-
-        //then
-        Integer sumAge = (Integer) Await.result(sumAgeF, TIMEOUT.duration());
-        assertThat(sumAge).isEqualTo(63);
-    }
-
-    @Test
-    public void combineSeveralFuturesWithMap() throws Exception {
-        //given
-        Future<Person> meFuture = Futures.successful(new Person().setName("Juan").setAge(35));
-        Future<Person> friendFuture = Futures.successful(new Person().setName("Miguel").setAge(28));
-
-        //when
-        /* TODO */
-        Future<Future<Integer>> sumAgeFF = null;
-
-        //then
-        Future<Integer> sumAgeF = Await.result(sumAgeFF, TIMEOUT.duration());
-        Integer sumAge = (Integer) Await.result(sumAgeF, TIMEOUT.duration());
-        assertThat(sumAge).isEqualTo(63);
-    }
-
-    @Test
-    public void combineSeveralFuturesWithFlatMapAndMap() throws Exception {
-        //given
-        Future<Person> meFuture = Futures.successful(new Person().setName("Juan").setAge(35));
-        Future<Person> friendFuture = Futures.successful(new Person().setName("Miguel").setAge(28));
-
-        //when
-        /* TODO */
-        Future<Integer> sumAgeF = null;
-
-        //then
-        Integer sumAge = (Integer) Await.result(sumAgeF, TIMEOUT.duration());
-        assertThat(sumAge).isEqualTo(63);
-    }
-
-    @Test
-    public void combineSeveralDependentFuturesWithFlatMapAndMap() throws Exception {
-        //given
-        Future<Person> meFuture = Futures.successful(new Person().setName("Juan").setAge(35));
-
-        //Use service Future<Person> getFriend(String name)
-
-        //when
-        /* TODO */
-        Future<Integer> sumAgeF = null;
-
-        //then
-        Integer sumAge = (Integer) Await.result(sumAgeF, TIMEOUT.duration());
-        assertThat(sumAge).isEqualTo(63);
-    }
-
-    @Test
-    public void combineSeveralFuturesWithFailureResult() throws Exception {
-        //given
-        Future<Person> meFuture = Futures.failed(new Exception("Unexpected error"));
-        Future<Person> friendFuture = Futures.successful(new Person().setName("Miguel").setAge(28));
-
-        //when
-        /* TODO */
-        Future<Integer> sumAgeF = null;
-
-        //then
-        Integer sumAge = (Integer) Await.result(sumAgeF, TIMEOUT.duration());
-        assertThat(sumAge).isEqualTo(-1);
-    }
-
-    @Test
-    public void combineSeveralFuturesWithAnotherFailureResult() throws Exception {
-        //given
-        Future<Person> meFuture = Futures.successful(new Person().setName("Juan").setAge(35));
-        Future<Person> friendFuture = Futures.failed(new Exception("Another unexpected error"));
-
-        //when
-        /* TODO */
-        Future<Integer> sumAgeF = null;
-
-        //then
-        Integer sumAge = (Integer) Await.result(sumAgeF, TIMEOUT.duration());
-        assertThat(sumAge).isEqualTo(-1);
-    }
-
-    @Test
-    public void combineSeveralFuturesWithALeftResult() throws Exception {
-        //given
-        Future<Either<GenericError, Person>> meFuture = Futures.successful(new Right<>(new Person().setName("Juan").setAge(35)));
-        Future<Either<GenericError, Person>> friendFuture = Futures.successful(new Left<>(new MyError("Invalid user")));
-
-        //when
-        /* TODO */
-        Future<Integer> sumAgeF = null;
-
-        //then
-        Integer sumAge = (Integer) Await.result(sumAgeF, TIMEOUT.duration());
-        assertThat(sumAge).isEqualTo(-2);
-    }
-
-
-    private Future<Person> getFriend(String name) {
-
-        return Futures.successful(new Person().setName("Miguel").setAge(28));
     }
 }

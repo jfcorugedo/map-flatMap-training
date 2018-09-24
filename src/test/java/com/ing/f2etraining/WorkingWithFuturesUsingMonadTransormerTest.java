@@ -28,7 +28,7 @@ import errors.GenericError;
 import static monad.MonadFutEitherWrapper.wrap;
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class WorkWithFuturesUsingMonadTransormerTest {
+public class WorkingWithFuturesUsingMonadTransormerTest {
 
     private static final ExecutionContext EXECUTOR = ExecutionContexts.fromExecutor(Executors.newSingleThreadExecutor());
     private static final Timeout TIMEOUT = new Timeout(Duration.create(5, "seconds"));
