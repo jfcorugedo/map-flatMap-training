@@ -6,6 +6,7 @@ import java.util.function.Function;
 import akka.dispatch.Futures;
 import errors.impl.MyError;
 import monad.MonadFutEither;
+import monad.MonadFutEitherWrapper;
 import scala.concurrent.ExecutionContext;
 import scala.concurrent.Future;
 import scala.util.Either;
@@ -55,5 +56,11 @@ public class MonadFutEitherError implements MonadFutEither<GenericError> {
 		return from
 				.flatMap(t -> t.isRight() ? pure(t.right().get()) : f.apply(t.left().get()) , ec)
 				.recoverWith(Java8.recoverF( t-> raiseError(new MyError(t.getMessage()))), ec);
+	}
+
+	@Override
+    public <T> MonadFutEitherWrapper<GenericError, T> dslFrom(Future<Either<GenericError, T>> future) {
+
+		return MonadFutEitherWrapper.wrap(future, this);
 	}
 }

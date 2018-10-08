@@ -1,6 +1,7 @@
 package monad;
 
 
+import errors.GenericError;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -117,4 +118,6 @@ public interface MonadFutEither<E> {
 			});
 		}
 	}
+
+    <T> MonadFutEitherWrapper<GenericError, T> dslFrom(Future<Either<GenericError, T>> future);
 }
