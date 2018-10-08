@@ -38,14 +38,14 @@ public class MonadFutEitherWrapper<E, T> {
         return wrap( m.map(fut, f), m);
     }
 
-    public MonadFutEitherWrapper<E,T> recoverWith( Function<E, Future<Either<E,T>>> f ) {
+    public MonadFutEitherWrapper<E,T> handleErrorWith( Function<E, Future<Either<E,T>>> f ) {
 
-        return wrap( m.recoverWith(fut, f), m);
+        return wrap( m.handleErrorWith(fut, f), m);
     }
 
-    public MonadFutEitherWrapper<E,T> recover( Function<E, T> f ) {
+    public MonadFutEitherWrapper<E,T> handleError( Function<E, T> f ) {
 
-        return wrap( m.recover(fut, f), m );
+        return wrap( m.handleError(fut, f), m );
     }
 
     public <B, S> MonadFutEitherWrapper<E,S> map2( Future<Either<E, B>> fromB, BiFunction<T,B,S> f  ) {

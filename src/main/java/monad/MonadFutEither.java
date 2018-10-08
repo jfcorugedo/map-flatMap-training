@@ -27,7 +27,7 @@ public interface MonadFutEither<E> {
 
 	<T> Future<Either<E,T>> raiseError( E error );
 
-	<T> Future<Either<E,T>> recoverWith( Future<Either<E, T>> from, Function<E, Future<Either<E,T>>> f );
+	<T> Future<Either<E,T>> handleErrorWith( Future<Either<E, T>> from, Function<E, Future<Either<E,T>>> f );
 
 	/**
 	 * Deriveds
@@ -39,9 +39,9 @@ public interface MonadFutEither<E> {
 
 	}
 
-	default <T> Future<Either<E,T>> recover( Future<Either<E,T>> from, Function<E, T> f ) {
+	default <T> Future<Either<E,T>> handleError( Future<Either<E,T>> from, Function<E, T> f ) {
 
-		return recoverWith(from, t -> pure(f.apply(t)));
+		return handleErrorWith(from, t -> pure(f.apply(t)));
 
 	}
 
