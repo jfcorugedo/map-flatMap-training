@@ -15,10 +15,11 @@ import scala.util.Left;
 import scala.util.Right;
 import util.Java8;
 import errors.GenericError;
+import static monad.MonadFutEitherWrapper.wrap;
 
 public class MonadFutEitherError implements MonadFutEither<GenericError> {
 	
-	final ExecutionContext ec;
+	private final ExecutionContext ec;
 	
 	
 	public MonadFutEitherError(ExecutionContext ec) {
@@ -60,7 +61,6 @@ public class MonadFutEitherError implements MonadFutEither<GenericError> {
 
 	@Override
     public <T> MonadFutEitherWrapper<GenericError, T> dslFrom(Future<Either<GenericError, T>> future) {
-
-		return MonadFutEitherWrapper.wrap(future, this);
-	}
+	    return wrap(future, this);
+    }
 }

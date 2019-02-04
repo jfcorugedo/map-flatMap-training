@@ -1,13 +1,13 @@
 package monad;
 
 
-import errors.GenericError;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+import errors.GenericError;
 import function.Function3;
 import function.Function4;
 import scala.concurrent.Future;
@@ -119,5 +119,5 @@ public interface MonadFutEither<E> {
 		}
 	}
 
-    <T> MonadFutEitherWrapper<GenericError, T> dslFrom(Future<Either<GenericError, T>> future);
+	<T> MonadFutEitherWrapper<GenericError, T> dslFrom(Future<Either<GenericError, T>> future);
 }
