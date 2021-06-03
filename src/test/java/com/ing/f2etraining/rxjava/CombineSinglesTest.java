@@ -3,12 +3,14 @@ package com.ing.f2etraining.rxjava;
 import com.ing.f2etraining.model.Person;
 import io.reactivex.rxjava3.core.Single;
 import org.junit.Test;
+
+import static monad.rxjava.SingleUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CombineSinglesTest {
 
     @Test
-    public void combineSeveralSinglesWithFlatMap() throws Exception {
+    public void combineSeveralSinglesWithFlatMap() {
         //given
         Single<Person> meSingle = Single.just(new Person().setName("Juan").setAge(35));
         Single<Person> friendSingle = Single.just(new Person().setName("Luigi").setAge(28));
@@ -23,7 +25,7 @@ public class CombineSinglesTest {
     }
 
     @Test
-    public void combineSeveralFuturesWithMap() throws Exception {
+    public void combineSeveralFuturesWithMap() {
         //given
         Single<Person> meSingle = Single.just(new Person().setName("Juan").setAge(35));
         Single<Person> friendSingle = Single.just(new Person().setName("Luigi").setAge(28));
@@ -38,7 +40,7 @@ public class CombineSinglesTest {
     }
 
     @Test
-    public void combineSeveralFuturesWithFlatMapAndMap() throws Exception {
+    public void combineSeveralFuturesWithFlatMapAndMap() {
         //given
         Single<Person> meSingle = Single.just(new Person().setName("Juan").setAge(35));
         Single<Person> friendSingle = Single.just(new Person().setName("Luigi").setAge(28));
@@ -53,7 +55,55 @@ public class CombineSinglesTest {
     }
 
     @Test
-    public void combineSeveralDependentFuturesWithFlatMapAndMap() throws Exception {
+    public void combineTwoSingleWithSingleUtils() {
+        //given
+        Single<Person> meSingle = Single.just(new Person().setName("Juan").setAge(35));
+        Single<Person> friendSingle = Single.just(new Person().setName("Luigi").setAge(28));
+
+        //when
+        /* TODO: Use class SingleUtils to combine two Single objects */
+        Single<Integer> sumAges = null;
+
+        //then
+        Integer result = sumAges.blockingGet();
+        assertThat(result).isEqualTo(63);
+    }
+
+    @Test
+    public void combineThreeSingleWithSingleUtils() {
+        //given
+        Single<Person> meSingle = Single.just(new Person().setName("Juan").setAge(35));
+        Single<Person> friendSingle = Single.just(new Person().setName("Luigi").setAge(28));
+        Single<Person> otherSingle = Single.just(new Person().setName("David").setAge(30));
+
+        //when
+        /* TODO: Use class SingleUtils to combine three Single objects */
+        Single<Integer> sumAges = null;
+
+        //then
+        Integer result = sumAges.blockingGet();
+        assertThat(result).isEqualTo(93);
+    }
+
+    @Test
+    public void combineFourSingleWithSingleUtils() {
+        //given
+        Single<Person> meSingle = Single.just(new Person().setName("Juan").setAge(35));
+        Single<Person> friendSingle = Single.just(new Person().setName("Luigi").setAge(28));
+        Single<Person> otherSingle = Single.just(new Person().setName("David").setAge(30));
+        Single<Person> anotherSingle = Single.just(new Person().setName("Nacho").setAge(21));
+
+        //when
+        /* TODO: Use class SingleUtils to combine three Single objects */
+        Single<Integer> sumAges = null;
+
+        //then
+        Integer result = sumAges.blockingGet();
+        assertThat(result).isEqualTo(114);
+    }
+
+    @Test
+    public void combineSeveralDependentFuturesWithFlatMapAndMap() {
         //given
         Single<Person> meSingle = Single.just(new Person().setName("Juan").setAge(35));
 
@@ -69,7 +119,7 @@ public class CombineSinglesTest {
     }
 
     @Test
-    public void combineSeveralFuturesWithFailureResult() throws Exception {
+    public void combineSeveralFuturesWithFailureResult() {
         //given
         Single<Person> meSingle = Single.error(new Exception("Unexpected error"));
         Single<Person> friendSingle = Single.just(new Person().setName("Luigi").setAge(28));
@@ -84,7 +134,7 @@ public class CombineSinglesTest {
     }
 
     @Test
-    public void combineSeveralFuturesWithAnotherFailureResult() throws Exception {
+    public void combineSeveralFuturesWithAnotherFailureResult() {
         //given
         Single<Person> meSingle = Single.just(new Person().setName("Juan").setAge(35));
         Single<Person> friendSingle = Single.error(new Exception("Another unexpected error"));
@@ -99,7 +149,7 @@ public class CombineSinglesTest {
     }
 
     @Test
-    public void combineSeveralFuturesUsingFailureRecovery() throws Exception {
+    public void combineSeveralFuturesUsingFailureRecovery() {
         //given
         Single<Person> meSingle = Single.just(new Person().setName("Juan").setAge(35));
         Single<Person> friendSingle = Single.error(new Exception("Another unexpected error"));
@@ -114,7 +164,7 @@ public class CombineSinglesTest {
     }
 
     @Test
-    public void combineSeveralFuturesUsingFallback() throws Exception {
+    public void combineSeveralFuturesUsingFallback() {
         //given
         Single<Person> meSingle = Single.just(new Person().setName("Juan").setAge(35));
         Single<Person> friendSingle = Single.error(new Exception("Another unexpected error"));
