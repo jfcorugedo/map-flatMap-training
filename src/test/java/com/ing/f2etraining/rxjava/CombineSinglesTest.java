@@ -98,8 +98,46 @@ public class CombineSinglesTest {
         assertThat(result).isEqualTo(-1);
     }
 
+    @Test
+    public void combineSeveralFuturesUsingFailureRecovery() throws Exception {
+        //given
+        Single<Person> meSingle = Single.just(new Person().setName("Juan").setAge(35));
+        Single<Person> friendSingle = Single.error(new Exception("Another unexpected error"));
+
+        //when
+        /* TODO: Use failureRecovery function */
+        Single<Integer> sumAges = null;
+
+        //then
+        Integer result = sumAges.blockingGet();
+        assertThat(result).isEqualTo(-2);
+    }
+
+    @Test
+    public void combineSeveralFuturesUsingFallback() throws Exception {
+        //given
+        Single<Person> meSingle = Single.just(new Person().setName("Juan").setAge(35));
+        Single<Person> friendSingle = Single.error(new Exception("Another unexpected error"));
+
+        //when
+        /* TODO: Use fallback function */
+        Single<Integer> sumAges = null;
+
+        //then
+        Integer result = sumAges.blockingGet();
+        assertThat(result).isEqualTo(-3);
+    }
+
     private Single<Person> getFriend(String name) {
 
         return Single.just(new Person().setName("Luigi").setAge(28));
+    }
+
+    private Single<Integer> failureRecovery(Throwable error) {
+        return Single.just(-2);
+    }
+
+    private Single<Integer> fallback() {
+        return Single.just(-3);
     }
 }
