@@ -40,6 +40,20 @@ public class CombineSinglesTest {
     }
 
     @Test
+    public void getAgeOfPersonWithMap() {
+        //given
+        Single<Person> meSingle = Single.just(new Person().setName("Juan").setAge(35));
+
+        //when
+        /* TODO */
+        Single<Integer> age = null;
+
+        //then
+        Integer result = age.blockingGet();
+        assertThat(result).isEqualTo(35);
+    }
+
+    @Test
     public void combineSeveralFuturesWithFlatMapAndMap() {
         //given
         Single<Person> meSingle = Single.just(new Person().setName("Juan").setAge(35));
