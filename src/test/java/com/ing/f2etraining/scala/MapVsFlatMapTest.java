@@ -1,4 +1,4 @@
-package com.ing.f2etraining;
+package com.ing.f2etraining.scala;
 
 import akka.dispatch.ExecutionContexts;
 import akka.dispatch.Futures;

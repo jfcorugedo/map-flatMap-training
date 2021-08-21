@@ -1,4 +1,4 @@
-package com.ing.f2etraining;
+package com.ing.f2etraining.scala;
 
 import akka.dispatch.ExecutionContexts;
 import errors.GenericError;
@@ -127,7 +127,7 @@ public class SummaryServiceTest {
     final Summary summary = res.right().get();
 
     assertThat( summary.getBook() ).isEqualTo( expectedBook );
-    assertThat( summary.getSales().isPresent() ).isFalse();
+    assertThat( summary.getSales() ).isEmpty();
     assertThat( summary.getAuthor() ).isEqualTo( expectedAuthor );
     assertThat( summary.getChapter() ).isEqualTo( expectedChapters );
 
