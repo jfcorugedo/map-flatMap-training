@@ -4,7 +4,6 @@ import com.ing.f2etraining.model.Person;
 import io.reactivex.rxjava3.core.Single;
 import org.junit.Test;
 
-import static monad.rxjava.SingleUtils.*;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CombineSinglesTest {

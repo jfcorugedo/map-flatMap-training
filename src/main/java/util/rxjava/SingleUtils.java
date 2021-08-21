@@ -1,4 +1,4 @@
-package monad.rxjava;
+package util.rxjava;
 
 import function.Function3;
 import function.Function4;
@@ -7,6 +7,10 @@ import io.reactivex.rxjava3.core.Single;
 import java.util.function.BiFunction;
 
 public class SingleUtils {
+
+    private SingleUtils() {
+        super();
+    }
 
     public static <A, B, R> Single<R> map2(Single<A> a, Single<B> b, BiFunction<A, B, R> f) {
         return a.flatMap( aR -> b.map( bR -> f.apply(aR, bR)));
