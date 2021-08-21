@@ -24,7 +24,7 @@ public class CombineSinglesTest {
     }
 
     @Test
-    public void combineSeveralFuturesWithMap() {
+    public void combineSeveralSingleWithMap() {
         //given
         Single<Person> meSingle = Single.just(new Person().setName("Juan").setAge(35));
         Single<Person> friendSingle = Single.just(new Person().setName("Luigi").setAge(28));
@@ -53,7 +53,7 @@ public class CombineSinglesTest {
     }
 
     @Test
-    public void combineSeveralFuturesWithFlatMapAndMap() {
+    public void combineSeveralSingleWithFlatMapAndMap() {
         //given
         Single<Person> meSingle = Single.just(new Person().setName("Juan").setAge(35));
         Single<Person> friendSingle = Single.just(new Person().setName("Luigi").setAge(28));
@@ -116,7 +116,7 @@ public class CombineSinglesTest {
     }
 
     @Test
-    public void combineSeveralDependentFuturesWithFlatMapAndMap() {
+    public void combineSeveralDependentSingleWithFlatMapAndMap() {
         //given
         Single<Person> meSingle = Single.just(new Person().setName("Juan").setAge(35));
 
@@ -131,76 +131,8 @@ public class CombineSinglesTest {
         assertThat(result).isEqualTo(63);
     }
 
-    @Test
-    public void combineSeveralFuturesWithFailureResult() {
-        //given
-        Single<Person> meSingle = Single.error(new Exception("Unexpected error"));
-        Single<Person> friendSingle = Single.just(new Person().setName("Luigi").setAge(28));
-
-        //when
-        /* TODO */
-        Single<Integer> sumAges = null;
-
-        //then
-        Integer result = sumAges.blockingGet();
-        assertThat(result).isEqualTo(-1);
-    }
-
-    @Test
-    public void combineSeveralFuturesWithAnotherFailureResult() {
-        //given
-        Single<Person> meSingle = Single.just(new Person().setName("Juan").setAge(35));
-        Single<Person> friendSingle = Single.error(new Exception("Another unexpected error"));
-
-        //when
-        /* TODO */
-        Single<Integer> sumAges = null;
-
-        //then
-        Integer result = sumAges.blockingGet();
-        assertThat(result).isEqualTo(-1);
-    }
-
-    @Test
-    public void combineSeveralFuturesUsingFailureRecovery() {
-        //given
-        Single<Person> meSingle = Single.just(new Person().setName("Juan").setAge(35));
-        Single<Person> friendSingle = Single.error(new Exception("Another unexpected error"));
-
-        //when
-        /* TODO: Use failureRecovery function */
-        Single<Integer> sumAges = null;
-
-        //then
-        Integer result = sumAges.blockingGet();
-        assertThat(result).isEqualTo(-2);
-    }
-
-    @Test
-    public void combineSeveralFuturesUsingFallback() {
-        //given
-        Single<Person> meSingle = Single.just(new Person().setName("Juan").setAge(35));
-        Single<Person> friendSingle = Single.error(new Exception("Another unexpected error"));
-
-        //when
-        /* TODO: Use fallback function */
-        Single<Integer> sumAges = null;
-
-        //then
-        Integer result = sumAges.blockingGet();
-        assertThat(result).isEqualTo(-3);
-    }
-
     private Single<Person> getFriend(String name) {
 
         return Single.just(new Person().setName("Luigi").setAge(28));
-    }
-
-    private Single<Integer> failureRecovery(Throwable error) {
-        return Single.just(-2);
-    }
-
-    private Single<Integer> fallback() {
-        return Single.just(-3);
     }
 }
