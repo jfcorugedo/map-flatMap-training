@@ -15,7 +15,7 @@ public class CombineSinglesTest {
         Single<Person> friendSingle = Single.just(new Person().setName("Luigi").setAge(28));
 
         //when
-        /* TODO */
+        /* TODO: You have to use flatMap */
         Single<Integer> sumAges = null;
 
         //then
@@ -30,26 +30,12 @@ public class CombineSinglesTest {
         Single<Person> friendSingle = Single.just(new Person().setName("Luigi").setAge(28));
 
         //when
-        /* TODO */
+        /* TODO: You have to use map */
         Single<Integer> sumAges = null;
 
         //then
         Integer result = sumAges.blockingGet();
         assertThat(result).isEqualTo(63);
-    }
-
-    @Test
-    public void getAgeOfPersonWithMap() {
-        //given
-        Single<Person> meSingle = Single.just(new Person().setName("Juan").setAge(35));
-
-        //when
-        /* TODO */
-        Single<Integer> age = null;
-
-        //then
-        Integer result = age.blockingGet();
-        assertThat(result).isEqualTo(35);
     }
 
     @Test
@@ -59,7 +45,7 @@ public class CombineSinglesTest {
         Single<Person> friendSingle = Single.just(new Person().setName("Luigi").setAge(28));
 
         //when
-        /* TODO */
+        /* TODO: Use both flatMap and map */
         Single<Integer> sumAges = null;
 
         //then
@@ -74,7 +60,7 @@ public class CombineSinglesTest {
         Single<Person> friendSingle = Single.just(new Person().setName("Luigi").setAge(28));
 
         //when
-        /* TODO: Use class SingleUtils to combine two Single objects */
+        /* TODO: Use class util.rxjava.SingleUtils to combine several Single objects */
         Single<Integer> sumAges = null;
 
         //then
@@ -90,7 +76,7 @@ public class CombineSinglesTest {
         Single<Person> otherSingle = Single.just(new Person().setName("David").setAge(30));
 
         //when
-        /* TODO: Use class SingleUtils to combine three Single objects */
+        /* TODO: Use class util.rxjava.SingleUtils to combine three Single objects */
         Single<Integer> sumAges = null;
 
         //then
@@ -107,7 +93,7 @@ public class CombineSinglesTest {
         Single<Person> anotherSingle = Single.just(new Person().setName("Nacho").setAge(21));
 
         //when
-        /* TODO: Use class SingleUtils to combine three Single objects */
+        /* TODO: Use class util.rxjava.SingleUtils to combine three Single objects */
         Single<Integer> sumAges = null;
 
         //then
@@ -120,7 +106,7 @@ public class CombineSinglesTest {
         //given
         Single<Person> meSingle = Single.just(new Person().setName("Juan").setAge(35));
 
-        //Hint: Use service Single<Person> getFriend(String name) to get the other person
+        //Hint: Use method getFriend(String name) to get the other person
 
         //when
         /* TODO */
@@ -131,6 +117,11 @@ public class CombineSinglesTest {
         assertThat(result).isEqualTo(63);
     }
 
+    /**
+     * This method simulates a call to another services that will return the friend of the given person
+     * @param name Name of the person whose friend we want to know
+     * @return Person object representing the friend of the input name
+     */
     private Single<Person> getFriend(String name) {
 
         return Single.just(new Person().setName("Luigi").setAge(28));
