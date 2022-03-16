@@ -60,13 +60,13 @@ public class ErrorHandlingWithMonoTest {
     }
 
     @Test
-    public void combineSeveralMonoUsingFallback() {
+    public void combineSeveralMonoAndCalculateDefaultValue() {
         //given
         Mono<Person> meMono = Mono.just(new Person().setName("Juan").setAge(35));
         Mono<Person> friendMono = Mono.error(new Exception("Another unexpected error"));
 
         //when
-        /* TODO: Use fallback function */
+        /* TODO: Use computeDefaultValue function */
         Mono<Integer> sumAges = null;
 
         //then
@@ -74,16 +74,11 @@ public class ErrorHandlingWithMonoTest {
         assertThat(result).isEqualTo(-3);
     }
 
-    private Mono<Person> getFriend(String name) {
-
-        return Mono.just(new Person().setName("Luigi").setAge(28));
-    }
-
     private Mono<Integer> failureRecovery(Throwable error) {
         return Mono.just(-2);
     }
 
-    private Mono<Integer> fallback() {
-        return Mono.just(-3);
+    private Integer computeDefaultValue() {
+        return -3;
     }
 }
