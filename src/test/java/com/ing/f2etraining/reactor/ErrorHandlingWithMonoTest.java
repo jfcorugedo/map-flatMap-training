@@ -21,8 +21,12 @@ public class ErrorHandlingWithMonoTest {
         Mono<Person> friendMono = Mono.just(new Person().setName("Luigi").setAge(28));
 
         //when
-        /* TODO */
-        Mono<Integer> sumAges = null;
+        /* Take a look at the official documentation: https://projectreactor.io/docs/core/release/reference/#error.handling */
+        Mono<Integer> sumAges = meMono.flatMap(
+                me -> friendMono.map(
+                        friend -> me.getAge() + friend.getAge()
+                )
+        ).onErrorReturn(-1);
 
         //then
         Integer result = sumAges.block();
@@ -36,8 +40,12 @@ public class ErrorHandlingWithMonoTest {
         Mono<Person> friendMono = Mono.error(new Exception("Another unexpected error"));
 
         //when
-        /* TODO */
-        Mono<Integer> sumAges = null;
+        /* Take a look at the official documentation: https://projectreactor.io/docs/core/release/reference/#error.handling */
+        Mono<Integer> sumAges = meMono.flatMap(
+                me -> friendMono.map(
+                        friend -> me.getAge() + friend.getAge()
+                )
+        ).onErrorReturn(-1);
 
         //then
         Integer result = sumAges.block();
@@ -51,8 +59,12 @@ public class ErrorHandlingWithMonoTest {
         Mono<Person> friendMono = Mono.error(new Exception("Another unexpected error"));
 
         //when
-        /* TODO: Use failureRecovery function */
-        Mono<Integer> sumAges = null;
+        /* Take a look at the official documentation: https://projectreactor.io/docs/core/release/reference/#error.handling */
+        Mono<Integer> sumAges = meMono.flatMap(
+                me -> friendMono.map(
+                        friend -> me.getAge() + friend.getAge()
+                )
+        ).onErrorResume( error -> failureRecovery(error));
 
         //then
         Integer result = sumAges.block();
@@ -66,24 +78,23 @@ public class ErrorHandlingWithMonoTest {
         Mono<Person> friendMono = Mono.error(new Exception("Another unexpected error"));
 
         //when
-        /* TODO: Use fallback function */
-        Mono<Integer> sumAges = null;
+        /* Take a look at the official documentation: https://projectreactor.io/docs/core/release/reference/#error.handling */
+        Mono<Integer> sumAges = meMono.flatMap(
+                me -> friendMono.map(
+                        friend -> me.getAge() + friend.getAge()
+                )
+        ).onErrorResume(error -> Mono.just(computeDefaultValue()));
 
         //then
         Integer result = sumAges.block();
         assertThat(result).isEqualTo(-3);
     }
 
-    private Mono<Person> getFriend(String name) {
-
-        return Mono.just(new Person().setName("Luigi").setAge(28));
-    }
-
     private Mono<Integer> failureRecovery(Throwable error) {
         return Mono.just(-2);
     }
 
-    private Mono<Integer> fallback() {
-        return Mono.just(-3);
+    private Integer computeDefaultValue() {
+        return -3;
     }
 }
