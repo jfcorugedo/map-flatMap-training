@@ -3,6 +3,7 @@ package com.ing.f2etraining.reactor;
 import com.ing.f2etraining.model.Person;
 import org.junit.Test;
 import reactor.core.publisher.Mono;
+import util.reactor.MonoUtils;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -51,8 +52,11 @@ public class CombineMonoTest {
         Mono<Person> friendMono = Mono.just(new Person().setName("Luigi").setAge(28));
 
         //when
-        /* TODO: Use both flatMap and map */
-        Mono<Integer> sumAges = null;
+        Mono<Integer> sumAges = meMono.flatMap(
+                me -> friendMono.map(
+                        friend -> me.getAge() + friend.getAge()
+                )
+        );
 
         //then
         Integer result = sumAges.block();
@@ -66,8 +70,7 @@ public class CombineMonoTest {
         Mono<Person> friendMono = Mono.just(new Person().setName("Luigi").setAge(28));
 
         //when
-        /* TODO: You can use util.reactor.MonoUtils to combine several Mono instances */
-        Mono<Integer> sumAges = null;
+        Mono<Integer> sumAges = MonoUtils.map2(meMono, friendMono, (me, friend) -> me.getAge() + friend.getAge());
 
         //then
         Integer result = sumAges.block();
@@ -75,15 +78,19 @@ public class CombineMonoTest {
     }
 
     @Test
-    public void combineThreeMonoWithSingleUtils() {
+    public void combineThreeMonoWithMonoUtils() {
         //given
         Mono<Person> meMono = Mono.just(new Person().setName("Juan").setAge(35));
         Mono<Person> friendMono = Mono.just(new Person().setName("Luigi").setAge(28));
         Mono<Person> otherMono = Mono.just(new Person().setName("David").setAge(30));
 
         //when
-        /* TODO: Use class util.reactor.MonoUtils to combine several Mono objects */
-        Mono<Integer> sumAges = null;
+        Mono<Integer> sumAges = MonoUtils.map3(
+                meMono,
+                friendMono,
+                otherMono,
+                (me, friend, other) -> me.getAge() + friend.getAge() + other.getAge()
+        );
 
         //then
         Integer result = sumAges.block();
@@ -91,7 +98,7 @@ public class CombineMonoTest {
     }
 
     @Test
-    public void combineFourSingleWithSingleUtils() {
+    public void combineFourSingleWithMonoUtils() {
         //given
         Mono<Person> meSingle = Mono.just(new Person().setName("Juan").setAge(35));
         Mono<Person> friendMono = Mono.just(new Person().setName("Luigi").setAge(28));
@@ -99,8 +106,13 @@ public class CombineMonoTest {
         Mono<Person> anotherMono = Mono.just(new Person().setName("Nacho").setAge(21));
 
         //when
-        /* TODO: Use class util.reactor.MonoUtils to combine several Mono objects */
-        Mono<Integer> sumAges = null;
+        Mono<Integer> sumAges = MonoUtils.map4(
+                meSingle,
+                friendMono,
+                otherMono,
+                anotherMono,
+                (me, friend, other, another) -> me.getAge() + friend.getAge() + other.getAge() + another.getAge()
+        );
 
         //then
         Integer result = sumAges.block();
@@ -115,8 +127,8 @@ public class CombineMonoTest {
         //Hint: Use service getFriend(String name) to get the other person
 
         //when
-        /* TODO */
-        Mono<Integer> sumAges = null;
+        Mono<Person> friendMono = meMono.flatMap(me -> getFriend(me.getName()));
+        Mono<Integer> sumAges = meMono.flatMap( me -> friendMono.map( friend -> me.getAge() + friend.getAge() ));
 
         //then
         Integer result = sumAges.block();
