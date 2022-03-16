@@ -72,7 +72,7 @@ public class ErrorHandlingWithMonoTest {
     }
 
     @Test
-    public void combineSeveralMonoUsingFallback() {
+    public void combineSeveralMonoAndCalculateDefaultValue() {
         //given
         Mono<Person> meMono = Mono.just(new Person().setName("Juan").setAge(35));
         Mono<Person> friendMono = Mono.error(new Exception("Another unexpected error"));
