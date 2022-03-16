@@ -31,10 +31,10 @@ public class CombineMonoTest {
 
         //when
         /* TODO: You have to use Map */
-        Mono<Integer> sumAges = null;
+        Mono<Mono<Integer>> sumAges = null;
 
         //then
-        Integer result = sumAges.block();
+        Integer result = sumAges.block().block();
         assertThat(result).isEqualTo(63);
     }
 
