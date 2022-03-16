@@ -15,8 +15,11 @@ public class CombineMonoTest {
         Mono<Person> friendMono = Mono.just(new Person().setName("Luigi").setAge(28));
 
         //when
-        /* TODO: You have to use flatMap */
-        Mono<Integer> sumAges = null;
+        Mono<Integer> sumAges = meMono.flatMap(
+                me -> friendMono.flatMap( //Here we are using flatMap on purpose, just to show what happens when you use the wrong operator
+                        friend -> Mono.just(me.getAge() + friend.getAge())
+                )
+        );
 
         //then
         Integer result = sumAges.block();
@@ -30,11 +33,14 @@ public class CombineMonoTest {
         Mono<Person> friendMono = Mono.just(new Person().setName("Luigi").setAge(28));
 
         //when
-        /* TODO: You have to use Map */
-        Mono<Integer> sumAges = null;
+        Mono<Mono<Integer>> sumAges = meMono.map( //Here we are using map on purpose, just to show what happens when you use the wrong operator
+                me -> friendMono.map(
+                        friend -> me.getAge() + friend.getAge()
+                )
+        );
 
         //then
-        Integer result = sumAges.block();
+        Integer result = sumAges.block().block();
         assertThat(result).isEqualTo(63);
     }
 
